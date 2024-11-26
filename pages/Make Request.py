@@ -64,7 +64,7 @@ st.info("Veras el estado de tu solicitud en la pagina principal", icon="ℹ️")
 # Parte modificada para trabajar desde un CSV
 
 def add_to_csv(fecha, nombre, tiposolicitud, puesto, EPP_soli=" ", justificacion=" ", comentario=" ", EPP_cambio=" ", Estado="En proceso"): # cspell: disable-line
-    ruta = "Databases/TRS_csv.csv"
+    ruta = "/Databases/TRS_csv.csv"
     df = pd.read_csv(ruta, encoding="latin-1")
     new_id = df["ID"].max() + 1 if not df.empty else 1 # Agregar de manera automática los indices de las solicitudes 
     

@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 
-st.image(image="Assets/BakerHughesLogo.svg", width=800)
+st.image(image="https://dam.bakerhughes.com/m/6ce7dc7bd0fc30fc/original/Baker-Hughes-Logo.svg", width=800)
 st.title("Pagina principal")
 
 st.info("El estado sera modificado por el encargado de aprobar esta solicitud", icon="⚠️")

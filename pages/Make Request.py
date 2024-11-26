@@ -14,7 +14,7 @@ st.title("Crear una nueva solicitud")
 date = st.date_input("Fecha de solicitud", value=datetime.date.today())
 
 #Crear conexión con base de datos para su actualización 
-conn = sql.connect('/Databases/TRS_Personal.db')
+conn = sql.connect('Databases/TRS_Personal 1.db')
 cursor = conn.cursor()
 
 
@@ -64,7 +64,7 @@ st.info("Veras el estado de tu solicitud en la pagina principal", icon="ℹ️")
 # Parte modificada para trabajar desde un CSV
 
 def add_to_csv(fecha, nombre, tiposolicitud, puesto, EPP_soli=" ", justificacion=" ", comentario=" ", EPP_cambio=" ", Estado="En proceso"): # cspell: disable-line
-    ruta = "/Databases/TRS_csv.csv"
+    ruta = "Databases/TRS_csv 1.csv"
     df = pd.read_csv(ruta, encoding="latin-1")
     new_id = df["ID"].max() + 1 if not df.empty else 1 # Agregar de manera automática los indices de las solicitudes 
     

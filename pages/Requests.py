@@ -5,7 +5,7 @@ from datetime import datetime
 st.subheader("Solicitudes realizadas por el personal de TRS en espera de aprobación")
 
 # Abrimos nuestro CSV
-df = pd.read_csv('Databases/TRS_csv.csv', index_col="ID")
+df = pd.read_csv('Databases/TRS_csv 1.csv', index_col="ID")
 blocked_cols = ["ID",
                 "Fecha",
                 "Nombre",
@@ -31,7 +31,7 @@ if not edited_df.equals(df):
         edited_df.at[index, "Ultima modificacion"] = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     
     # Guardar los cambios en el CSV
-    edited_df.to_csv('Databases/TRS_csv.csv')
+    edited_df.to_csv('Databases/TRS_csv 1.csv')
 
     st.success("Los cambios se han guardado correctamente.")
 

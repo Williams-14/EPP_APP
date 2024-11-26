@@ -8,7 +8,7 @@ st.info("El estado sera modificado por el encargado de aprobar esta solicitud", 
 
 # Abrimos nuestro CSV
 
-df = pd.read_csv('/Databases/TRS_csv.csv')
+df = pd.read_csv('Databases/TRS_csv 1.csv')
 df.columns = df.columns.str.strip()
 
 blocked_cos = ["ID",

@@ -35,7 +35,7 @@ tipo_solicitud = st.selectbox("Tipo de solicitud*", ["Nueva solicitud", "Reempla
 EPP_solicitado = ""
 justificacion = ""
 epp_reemplazo = ""
-agregar_datos = ""
+
 # Mostrar campos adicionales basados en la selección del tipo de solicitud
 if tipo_solicitud == "Nueva solicitud":
     EPP_solicitado = st.multiselect("Selecciona el EPP", 
@@ -53,7 +53,6 @@ else:
     
     justificacion = st.text_input("Justificación por reemplazo", placeholder="Breve justificación para darle seguimiento")
     
-    # agregar_datos = st.file_uploader("Carga evidencia del daño de tu equipo.")
 
 comentarios = st.text_input("Comentarios adicionales a su solicitud", placeholder="Sin comentarios",help="Si solicita algo que requiera talla, favor de colocarlo aquí")
 

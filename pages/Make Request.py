@@ -2,11 +2,10 @@ import streamlit as st
 import datetime
 import sqlite3 as sql
 import pandas as pd
-from time import sleep
 
 pages = ["Home", "Make Request", "Requests"]
 
-st.image(image="https://dam.bakerhughes.com/m/6ce7dc7bd0fc30fc/original/Baker-Hughes-Logo.svg", use_container_width=True)
+st.image(image="Assets/BakerHughesLogo.svg", use_container_width=True)
 
 st.title("Crear una nueva solicitud")
 
@@ -14,7 +13,7 @@ st.title("Crear una nueva solicitud")
 date = st.date_input("Fecha de solicitud", value=datetime.date.today())
 
 #Crear conexión con base de datos para su actualización 
-conn = sql.connect('Databases/TRS_Personal 1.db')
+conn = sql.connect('Databases/TRS_Personal.db')
 cursor = conn.cursor()
 
 
@@ -24,6 +23,7 @@ data_nombres = cursor.execute("SELECT Nombre FROM Usuarios").fetchall()
 
 nombres_operadores = [nombre[0] for nombre in data_nombres]
 name = st.selectbox("Nombre del solicitante*", nombres_operadores, placeholder="Nombre", index=None)
+conn.close()
 
 # Campo par ingresar el puesto del solicitante
 puesto_emp = st.text_input("Puesto que desempeña")
@@ -35,7 +35,7 @@ tipo_solicitud = st.selectbox("Tipo de solicitud*", ["Nueva solicitud", "Reempla
 EPP_solicitado = ""
 justificacion = ""
 epp_reemplazo = ""
-
+agregar_datos = ""
 # Mostrar campos adicionales basados en la selección del tipo de solicitud
 if tipo_solicitud == "Nueva solicitud":
     EPP_solicitado = st.multiselect("Selecciona el EPP", 
@@ -52,6 +52,8 @@ else:
     epp_reemplazo = st.text_input("Que epp desea reemplazar", placeholder="Solo nombres específicos")
     
     justificacion = st.text_input("Justificación por reemplazo", placeholder="Breve justificación para darle seguimiento")
+    
+    agregar_datos = st.file_uploader("Carga evidencia del daño de tu equipo.")
 
 comentarios = st.text_input("Comentarios adicionales a su solicitud", placeholder="Sin comentarios",help="Si solicita algo que requiera talla, favor de colocarlo aquí")
 
@@ -64,7 +66,7 @@ st.info("Veras el estado de tu solicitud en la pagina principal", icon="ℹ️")
 # Parte modificada para trabajar desde un CSV
 
 def add_to_csv(fecha, nombre, tiposolicitud, puesto, EPP_soli=" ", justificacion=" ", comentario=" ", EPP_cambio=" ", Estado="En proceso"): # cspell: disable-line
-    ruta = "Databases/TRS_csv 1.csv"
+    ruta = "Databases/TRS_csv.csv"
     df = pd.read_csv(ruta, encoding="latin-1")
     new_id = df["ID"].max() + 1 if not df.empty else 1 # Agregar de manera automática los indices de las solicitudes 
     
@@ -85,6 +87,7 @@ def add_to_csv(fecha, nombre, tiposolicitud, puesto, EPP_soli=" ", justificacion
     df = pd.concat([df, new_order], ignore_index=True)
     df.to_csv(ruta, index=False)
 
+    
 # Botón para enviar la información 
 if not name or not tipo_solicitud:
     st.error("Favor de no dejar espacios sin rellenar")
@@ -94,48 +97,25 @@ else:
         st.success("Solicitud enviada con éxito")
         st.warning("Vuelve a la página principal para ver el estado de tu solicitud")
 
+
 # Definir el HTML y CSS para el footer
 footer = """
     <style>
     .footer {
+        color: #018374;
         position: fixed;
         left: 0;
         bottom: 0;
         width: 100%;
         background-color: #FFFFFF;
-        color: black;
         text-align: center;
-        padding: 10px;
+        padding: 5px;
     }
     </style>
     <div class="footer">
-        <p> ® Baker Hughes Confidential</p>
+        <p>Baker Hughes Confidential</p>
     </div>
     """
     # Insertar el footer en la aplicación
 st.markdown(footer, unsafe_allow_html=True)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# def agregar_datos(fecha, nombre, tiposolicitud, puesto, EPP_soli="", justificacion="No reemplazo", comentario="Sin comentario", EPP_cambio=" ", Estado="En proceso"): # cspell: disable-line
-#     cursor.execute('''INSERT INTO Solicitudes (Fecha, Nombre_usuario, Puesto, Tipo_solicitud, EPP_eleccion, Justificacion_reemplazo, Comentarios, Estado, EPP_cambio) # cspell: disable-line
-#                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)''', (fecha, nombre, puesto, tiposolicitud, EPP_soli, justificacion, comentario, Estado, EPP_cambio)) # cspell: disable-line
-#     conn.commit()
-
-# Llamar a la función para agregar datos solo si el formulario ha sido enviado
-
-# # Cerrar la conexión
-# conn.close()

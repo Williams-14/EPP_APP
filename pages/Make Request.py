@@ -5,7 +5,7 @@ import pandas as pd
 
 pages = ["Home", "Make Request", "Requests"]
 
-st.image(image="Assets/BakerHughesLogo.svg", use_container_width=True)
+st.image(image="https://dam.bakerhughes.com/m/6ce7dc7bd0fc30fc/original/Baker-Hughes-Logo.svg", width=800)
 
 st.title("Crear una nueva solicitud")
 

@@ -35,6 +35,7 @@ tipo_solicitud = st.selectbox("Tipo de solicitud*", ["Nueva solicitud", "Reempla
 EPP_solicitado = ""
 justificacion = ""
 epp_reemplazo = ""
+datos_adjuntos = ''
 
 # Mostrar campos adicionales basados en la selección del tipo de solicitud
 if tipo_solicitud == "Nueva solicitud":
@@ -53,6 +54,7 @@ else:
     
     justificacion = st.text_input("Justificación por reemplazo", placeholder="Breve justificación para darle seguimiento")
     
+    datos_adjuntos = st.file_uploader(label="Carga evidencia.", accept_multiple_files=True, )
 
 comentarios = st.text_input("Comentarios adicionales a su solicitud", placeholder="Sin comentarios",help="Si solicita algo que requiera talla, favor de colocarlo aquí")
 

@@ -13,7 +13,7 @@ st.title("Crear una nueva solicitud")
 date = st.date_input("Fecha de solicitud", value=datetime.date.today())
 
 #Crear conexión con base de datos para su actualización 
-conn = sql.connect('Databases/TRS_Personal.db')
+conn = sql.connect('Databases/TRS_Personal 1.db')
 cursor = conn.cursor()
 
 

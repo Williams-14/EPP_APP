@@ -53,7 +53,7 @@ else:
     
     justificacion = st.text_input("Justificación por reemplazo", placeholder="Breve justificación para darle seguimiento")
     
-    agregar_datos = st.file_uploader("Carga evidencia del daño de tu equipo.")
+    # agregar_datos = st.file_uploader("Carga evidencia del daño de tu equipo.")
 
 comentarios = st.text_input("Comentarios adicionales a su solicitud", placeholder="Sin comentarios",help="Si solicita algo que requiera talla, favor de colocarlo aquí")
 
